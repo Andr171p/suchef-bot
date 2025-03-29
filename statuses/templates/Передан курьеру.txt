@@ -1,0 +1,3 @@
+Ваш заказ №{number} <b>ПЕРЕДАН КУРЬЕРУ</b>.
+Ожидайте доставку с {delivery_time_from} до {delivery_time_to}
+Сумма {amount}

@@ -1,0 +1,3 @@
+Ваш заказ №{number} <b>ПРИНЯТ</b> и будет
+доставлен {date} с {delivery_time_from} до {delivery_time_to} по адресу {delivery_adress}.
+Сумма: {amount} руб.

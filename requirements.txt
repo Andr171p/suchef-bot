@@ -1,0 +1,17 @@
+fastapi~=0.115.5
+aiogram~=3.19.0
+dishka~=1.4.2
+aiohttp~=3.11.14
+asyncpg~=0.30.0
+python-dotenv~=1.1.0
+pydantic~=2.10.6
+pydantic-settings~=2.6.1
+uvicorn~=0.32.1
+sqlalchemy~=2.0.36
+aio-pika~=9.5.0
+greenlet~=3.1.1
+bs4~=0.0.2
+langchain~=0.3.21
+langgraph~=0.3.21
+typing_extensions~=4.13.0
+faststream~=0.5.37

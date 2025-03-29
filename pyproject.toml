@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "suchefbot"
+version = "0.1.0"
+description = ""
+authors = ["AndreyKosov <andrey.kosov.05@inbox.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.115.12"}
+faststream = {extras = ["rabbit"], version = "^0.5.37"}
+langchain = "^0.3.21"
+langchain-community = "^0.3.20"
+langchain-elasticsearch = "^0.3.2"
+langchain-gigachat = "^0.3.8"
+langgraph = "^0.3.21"
+aiogram = "^3.19.0"
+dishka = "^1.5.1"
+bs4 = "^0.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

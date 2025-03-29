@@ -1,0 +1,1 @@
+Ваш заказ №{number} ПРИНЯТ время готовности {delivery_time_from} дата {date} г. по адресу: {trade_point_card}
