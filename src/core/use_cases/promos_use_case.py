@@ -1,7 +1,7 @@
 from typing import List
 
 from src.core.entities import Promo
-from src.web_parsers import PromosWebParser
+from src.services.web_parser import PromosWebParser
 
 
 class PromosUseCase:

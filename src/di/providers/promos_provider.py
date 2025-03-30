@@ -1,6 +1,6 @@
 from dishka import Provider, provide, Scope
 
-from src.web_parsers import PromosWebParser
+from src.services.web_parser import PromosWebParser
 from src.core.use_cases import PromosUseCase
 from src.config import settings
 
