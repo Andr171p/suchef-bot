@@ -1,5 +1,5 @@
 __all__ = (
-    "OrdersGateway"
+    "OrdersSenderGateway"
 )
 
-from src.gateways.orders_gateway import OrdersGateway
+from src.gateways.orders_sender_gateway import OrdersSenderGateway

@@ -8,7 +8,7 @@ class BonusUseCase:
         self._bonus_api = bonus_api
         self._user_repository = user_repository
 
-    async def get(self, user_id: int) -> Bonus:
+    async def get_bonus(self, user_id: int) -> Bonus:
         phone_number = await self._user_repository.get_phone_number_by_user_id(user_id)
         bonus = await self._bonus_api.get_by_phone_number(phone_number)
         return bonus
