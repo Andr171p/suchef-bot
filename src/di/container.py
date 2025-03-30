@@ -1,16 +1,20 @@
 from dishka import make_async_container
 
 from src.di.providers import (
-    DatabaseProvider,
-    OrdersProvider,
+    BotProvider,
+    BonusProvider,
     BrokerProvider,
-    BotProvider
+    PromosProvider,
+    OrdersProvider,
+    DatabaseProvider
 )
 
 
 container = make_async_container(
-    DatabaseProvider(),
-    OrdersProvider(),
+    BotProvider(),
+    BonusProvider(),
     BrokerProvider(),
-    BotProvider()
+    PromosProvider(),
+    OrdersProvider(),
+    DatabaseProvider()
 )
