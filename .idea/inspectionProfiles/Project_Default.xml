@@ -5,7 +5,7 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="72">
+          <list size="79">
             <item index="0" class="java.lang.String" itemvalue="pydantic_core" />
             <item index="1" class="java.lang.String" itemvalue="importlib_resources" />
             <item index="2" class="java.lang.String" itemvalue="pyasn1_modules" />
@@ -78,6 +78,13 @@
             <item index="69" class="java.lang.String" itemvalue="loguru" />
             <item index="70" class="java.lang.String" itemvalue="dishka" />
             <item index="71" class="java.lang.String" itemvalue="uvicorn" />
+            <item index="72" class="java.lang.String" itemvalue="transformers" />
+            <item index="73" class="java.lang.String" itemvalue="langgraph" />
+            <item index="74" class="java.lang.String" itemvalue="alembic" />
+            <item index="75" class="java.lang.String" itemvalue="aioredis" />
+            <item index="76" class="java.lang.String" itemvalue="langchain-huggingface" />
+            <item index="77" class="java.lang.String" itemvalue="sentence-transformers" />
+            <item index="78" class="java.lang.String" itemvalue="redis" />
           </list>
         </value>
       </option>

@@ -4,9 +4,9 @@ from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .models import UserOrm
-from src.suchef_bot.core.entities import User
-from src.suchef_bot.core.interfaces import UserRepository
+from .models import UserOrm, MessageOrm
+from src.suchef_bot.core.entities import User, BaseMessage
+from src.suchef_bot.core.interfaces import UserRepository, MessageRepository
 
 
 class SQLUserRepository(UserRepository):
@@ -81,3 +81,41 @@ class SQLUserRepository(UserRepository):
         except SQLAlchemyError as e:
             await self.session.rollback()
             raise RuntimeError(f"Error while reading users: {e}")
+
+
+class SQLMessageRepository(MessageRepository):
+    def __init__(self, session: AsyncSession) -> None:
+        self.session = session
+
+    async def bulk_create(self, messages: List[BaseMessage]) -> None:
+        try:
+            for message in messages:
+                message_orm = MessageOrm(**message.model_dump())
+                self.session.add(message_orm)
+            await self.session.commit()
+        except SQLAlchemyError as e:
+            await self.session.rollback()
+            raise RuntimeError(f"Error while creating messages: {e}")
+
+    async def read(self, chat_id: str) -> List[BaseMessage]:
+        try:
+            stmt = (
+                select(MessageOrm)
+                .where(MessageOrm.chat_id == chat_id)
+            )
+            results = await self.session.execute(stmt)
+            messages_orm = results.scalars().all()
+            return [BaseMessage.model_validate(message_orm) for message_orm in messages_orm]
+        except SQLAlchemyError as e:
+            await self.session.rollback()
+            raise RuntimeError(f"Error while reading messages: {e}")
+
+    async def list(self) -> List[BaseMessage]:
+        try:
+            stmt = select(MessageOrm)
+            results = await self.session.execute(stmt)
+            messages_orm = results.scalars().all()
+            return [BaseMessage.model_validate(message_orm) for message_orm in messages_orm]
+        except SQLAlchemyError as e:
+            await self.session.rollback()
+            raise RuntimeError(f"Error while reading list messages: {e}")

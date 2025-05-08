@@ -15,7 +15,7 @@ class UNFApiGateway(UNFGateway):
     def __init__(self, url: str) -> None:
         self.url = url
 
-    async def get_orders(self, phone_number: str) -> List[Optional[Order]]:
+    async def get_orders(self, phone_number: str) -> Optional[List[Optional[Order]]]:
         headers = {"Content-Type": "application/json; charset=UTF-8"}
         json = {"command": "status", "telefon": phone_number}
         try:
@@ -29,7 +29,6 @@ class UNFApiGateway(UNFGateway):
             return [Order.model_validate(order) for order in data["data"]["orders"]]
         except aiohttp.ClientError as e:
             logger.error("Error while receiving orders: %s", e)
-            return []
 
     async def get_bonus(self, phone_number: str) -> Optional[Bonus]:
         headers = {"Content-Type": "application/json; charset=UTF-8"}

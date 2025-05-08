@@ -32,8 +32,8 @@ class UserOrm(Base):
 class MessageOrm(Base):
     __tablename__ = "messages"
 
-    role: Mapped[str]
     chat_id: Mapped[str] = mapped_column(nullable=False)
+    role: Mapped[str]
     text: Mapped[str] = mapped_column(Text)
 
     __table_args__ = (

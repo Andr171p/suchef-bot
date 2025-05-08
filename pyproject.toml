@@ -18,6 +18,8 @@ aiogram = "^3.19.0"
 dishka = "^1.5.1"
 bs4 = "^0.0.2"
 redis = "^6.0.0"
+langchain-huggingface = "^0.2.0"
+accelerate = "^1.6.0"
 
 
 [build-system]

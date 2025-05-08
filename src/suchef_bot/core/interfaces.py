@@ -1,7 +1,13 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List
 
-from .entities import Order, Bonus, Promo, User
+from .entities import (
+    Order,
+    Bonus,
+    Promo,
+    User,
+    BaseMessage
+)
 
 
 class AiAgent(ABC):
@@ -40,3 +46,14 @@ class UserRepository(ABC):
 
     @abstractmethod
     async def list(self) -> List[User]: pass
+
+
+class MessageRepository(ABC):
+    @abstractmethod
+    async def bulk_create(self, messages: List[BaseMessage]) -> None: pass
+
+    @abstractmethod
+    async def read(self, chat_id: str) -> List[BaseMessage]: pass
+
+    @abstractmethod
+    async def list(self) -> List[BaseMessage]: pass

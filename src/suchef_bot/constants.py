@@ -33,3 +33,6 @@ PAY_STATUS = Literal[
     "NEW",
     "CONFIRMED"
 ]
+
+SIMILARITY_WEIGHT = 0.6
+BM25_WEIGHT = 0.4

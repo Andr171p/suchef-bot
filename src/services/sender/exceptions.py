@@ -1,4 +1,0 @@
-
-
-class SenderException(Exception):
-    pass

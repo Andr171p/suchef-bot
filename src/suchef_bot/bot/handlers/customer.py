@@ -13,8 +13,11 @@ customer_router = Router()
 @customer_router.message(Command("orders"))
 async def get_orders(message: Message, customer_service: FromDishka[CustomerService]) -> None:
     orders = await customer_service.get_orders(message.from_user.id)
-    if not orders:
-        await message.answer(...)  # TODO
+    if orders is None:
+        await message.answer("Произошла ошибка, попробуйте отправить запрос через 5-7 минут")
+        return
+    elif not orders:
+        await message.answer("У Вас нет активных заказов на текущую дату")
         return
     for order in orders:
         order_message = OrderMessage(order)
@@ -29,7 +32,7 @@ async def get_orders(message: Message, customer_service: FromDishka[CustomerServ
 async def get_bonus(message: Message, customer_service: FromDishka[CustomerService]) -> None:
     bonus = await customer_service.get_bonus(message.from_user.id)
     if not bonus:
-        await message.answer(...)  # TODO
+        await message.answer("Произошла ошибка, попробуйте отправить запрос через 5-7 минут")
         return
     bonus_message = BonusMessage(bonus)
     await message.answer_photo(
@@ -43,7 +46,7 @@ async def get_bonus(message: Message, customer_service: FromDishka[CustomerServi
 async def get_promos(message: Message, customer_service: FromDishka[CustomerService]) -> None:
     promos = await customer_service.get_promos()
     if not promos:
-        await message.answer(...)  # TODO
+        await message.answer("На данный момент нет действующих акций")
         return
     for promo in promos:
         promo_message = PromoMessage(promo)

@@ -1,3 +1,5 @@
+import logging
+
 from faststream.rabbit import RabbitRouter, RabbitExchange, ExchangeType
 from dishka.integrations.base import FromDishka
 
@@ -7,6 +9,8 @@ from src.suchef_bot.core.entities import Order
 from src.suchef_bot.bot.messages import OrderMessage
 from src.suchef_bot.core.interfaces import UserRepository
 
+
+logger = logging.getLogger(__name__)
 
 orders_router = RabbitRouter()
 
@@ -27,4 +31,8 @@ async def send_orders(
             photo=order_message.image,
             caption=order_message.text,
             reply_markup=order_message.keyboard
+        )
+        logger.info(
+            "Order message delivered successfully to user with telegram_id: %s",
+            telegram_id
         )
