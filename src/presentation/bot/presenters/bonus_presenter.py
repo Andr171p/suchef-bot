@@ -1,6 +1,6 @@
 from aiogram.types import Message
 
-from src.core.entities import Bonus
+from src.suchef_bot.core import Bonus
 from src.presentation.bot.messages import BonusMessage
 
 

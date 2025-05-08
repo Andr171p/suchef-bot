@@ -1,4 +1,4 @@
-from src.core.entities import Order
+from src.suchef_bot.core import Order
 from src.presentation.bot.messages import OrderMessage
 from src.services.sender import TelegramSenderService
 

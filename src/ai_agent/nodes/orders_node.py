@@ -1,7 +1,7 @@
 from src.ai_agent.nodes.base_node import BaseNode
 from src.ai_agent.state import State
 
-from src.core.use_cases import OrdersUseCase
+from src.suchef_bot.core.use_cases import OrdersUseCase
 
 
 class OrdersNode(BaseNode):

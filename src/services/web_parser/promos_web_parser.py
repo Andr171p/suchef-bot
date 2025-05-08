@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 from src.http import HTTPClient
 from src.http.responses import TextResponse
-from src.core.entities import Promo
+from src.suchef_bot.core import Promo
 from src.mappers import PromoMapper
 
 

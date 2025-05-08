@@ -5,7 +5,7 @@ if TYPE_CHECKING:
 
 from src.repository.base_repository import BaseRepository
 from src.database.models import DialogModel
-from src.core.entities import Dialog
+from src.suchef_bot.core import Dialog
 
 
 class DialogRepository(BaseRepository):

@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.core.entities import Promo
+from src.suchef_bot.core import Promo
 
 
 class PromoMapper:

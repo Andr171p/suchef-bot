@@ -48,13 +48,13 @@ class APISettings(BaseSettings):
 
 
 class StaticSettings(BaseSettings):
-    start: Path = BASE_DIR / "static" / "texts" / "start.json"
-    auth: Path = BASE_DIR / "static" / "texts" / "auth.json"
-    exc: Path = BASE_DIR / "static" / "texts" / "exc.json"
-    statuses: Path = BASE_DIR / "static" / "texts" / "statuses.json"
+    start: Path = BASE_DIR / "assets" / "texts" / "start.json"
+    auth: Path = BASE_DIR / "assets" / "texts" / "auth.json"
+    exc: Path = BASE_DIR / "assets" / "texts" / "exc.json"
+    statuses: Path = BASE_DIR / "assets" / "texts" / "statuses.json"
 
-    texts_dir: Path = BASE_DIR / "static" / "texts"
-    photo_dir: Path = BASE_DIR / "static" / "photos"
+    texts_dir: Path = BASE_DIR / "assets" / "texts"
+    photo_dir: Path = BASE_DIR / "assets" / "images"
 
 
 class BotSettings(BaseSettings):

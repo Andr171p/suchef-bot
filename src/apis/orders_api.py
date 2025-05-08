@@ -2,7 +2,7 @@ from typing import List, Union
 
 from src.http import HTTPClient
 from src.http.responses import JsonResponse
-from src.core.entities import Order
+from src.suchef_bot.core import Order
 from src.mappers import OrdersMapper
 
 

@@ -3,7 +3,7 @@ from typing import Union, List
 from src.repository.base_repository import BaseRepository
 from src.database.models import UserModel
 from src.database.crud import UserCRUD
-from src.core.entities import User
+from src.suchef_bot.core import User
 
 
 class UserRepository(BaseRepository):

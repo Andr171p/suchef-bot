@@ -3,7 +3,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from dishka.integrations.aiogram import FromDishka
 
-from src.core.use_cases import OrdersUseCase
+from src.suchef_bot.core.use_cases import OrdersUseCase
 from src.presentation.bot.presenters import OrdersPresenter
 
 

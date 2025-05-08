@@ -2,7 +2,7 @@ from dishka import Provider, provide, Scope
 
 from src.apis import BonusAPI
 from src.repository import UserRepository
-from src.core.use_cases import BonusUseCase
+from src.suchef_bot.core.use_cases import BonusUseCase
 from src.config import settings
 
 

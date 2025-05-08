@@ -1,7 +1,7 @@
 from dishka import Provider, provide, Scope
 
 from src.services.web_parser import PromosWebParser
-from src.core.use_cases import PromosUseCase
+from src.suchef_bot.core.use_cases import PromosUseCase
 from src.config import settings
 
 

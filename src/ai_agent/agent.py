@@ -32,7 +32,7 @@ class Agent:
 
         self._graph_compiled = graph.compile()
 
-    async def generate(self, user_id: int, user_question: str) -> str:
+    async def generate(self, user_id: int, user_question: str) -> dict:
         response = await self._graph_compiled.ainvoke({
             "user_id": user_id,
             "user_question": user_question

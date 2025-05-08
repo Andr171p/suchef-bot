@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = {extras = ["all"], version = "^0.115.12"}
-faststream = {extras = ["rabbit"], version = "^0.5.37"}
+faststream = {extras = ["rabbit"], version = "^0.5.40"}
 langchain = "^0.3.21"
 langchain-community = "^0.3.20"
 langchain-elasticsearch = "^0.3.2"
@@ -17,6 +17,7 @@ langgraph = "^0.3.21"
 aiogram = "^3.19.0"
 dishka = "^1.5.1"
 bs4 = "^0.0.2"
+redis = "^6.0.0"
 
 
 [build-system]

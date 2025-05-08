@@ -1,6 +1,6 @@
 from typing import List, Union
 
-from src.core.entities import Order
+from src.suchef_bot.core import Order
 
 
 class OrdersMapper:

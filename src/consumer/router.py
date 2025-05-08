@@ -6,8 +6,8 @@ from faststream.rabbit import (
 )
 from dishka.integrations.faststream import FromDishka
 
-from src.core.entities import Order
-from src.core.use_cases import OrdersNotificationsUseCase
+from src.suchef_bot.core import Order
+from src.suchef_bot.core.use_cases import OrdersNotificationsUseCase
 
 
 orders_router = RabbitRouter()

@@ -2,7 +2,7 @@ from typing import List
 
 from aiogram.types import Message
 
-from src.core.entities import Promo
+from src.suchef_bot.core import Promo
 from src.presentation.bot.keyboards import promo_kb
 
 

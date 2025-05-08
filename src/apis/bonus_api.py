@@ -1,6 +1,6 @@
 from src.http import HTTPClient
 from src.http.responses import JsonResponse
-from src.core.entities import Bonus
+from src.suchef_bot.core import Bonus
 from src.mappers import BonusMapper
 
 

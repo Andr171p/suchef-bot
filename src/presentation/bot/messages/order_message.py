@@ -2,14 +2,14 @@ from aiogram.types import FSInputFile
 from aiogram.types import InputFile, InlineKeyboardMarkup
 
 from src.config import BASE_DIR
-from src.core.entities import Order
+from src.suchef_bot.core import Order
 from src.misc.file_readers import read_txt
 from src.presentation.bot.keyboards import pay_kb, confirmed_kb
 
 
 STATUSES_TEMPLATES_DIR = BASE_DIR / "statuses" / "templates"
 
-STATUSES_PHOTOS_DIR = BASE_DIR / "statuses" / "photos"
+STATUSES_PHOTOS_DIR = BASE_DIR / "statuses" / "images"
 
 
 class OrderMessage:

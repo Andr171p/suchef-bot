@@ -1,7 +1,7 @@
 from typing import Literal, List
 from typing_extensions import TypedDict
 
-from src.core.entities import Order
+from src.suchef_bot.core import Order
 
 
 class State(TypedDict):

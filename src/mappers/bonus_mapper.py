@@ -1,4 +1,4 @@
-from src.core.entities import Bonus
+from src.suchef_bot.core import Bonus
 
 
 class BonusMapper:

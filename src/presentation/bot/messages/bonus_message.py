@@ -6,13 +6,13 @@ from aiogram.types import (
 
 from src.presentation.bot.keyboards import bonus_kb
 from src.misc.file_readers import read_txt
-from src.core.entities import Bonus
+from src.suchef_bot.core import Bonus
 from src.config import BASE_DIR
 
 
-PHOTO_PATH = BASE_DIR / "static" / "bonuses" / "photos" / "flyers.png"
+PHOTO_PATH = BASE_DIR / "assets" / "bonuses" / "images" / "flyers.png"
 
-TEMPLATES_DIR = BASE_DIR / "static" / "bonuses" / "templates"
+TEMPLATES_DIR = BASE_DIR / "assets" / "bonuses" / "templates"
 
 
 class BonusMessage:

@@ -6,7 +6,7 @@ from src.apis import OrdersAPI
 from src.gateways import OrdersSenderGateway
 from src.repository import UserRepository
 from src.services.sender import TelegramSenderService
-from src.core.use_cases import OrdersUseCase, OrdersNotificationsUseCase
+from src.suchef_bot.core.use_cases import OrdersUseCase, OrdersNotificationsUseCase
 from src.config import settings
 
 

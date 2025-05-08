@@ -1,7 +1,7 @@
 import re
 
 
-def format_phone(phone: str) -> str:
+def format_phone_number(phone: str) -> str:
     digits = re.sub(
         pattern='\D',
         repl='',
@@ -14,17 +14,8 @@ def format_phone(phone: str) -> str:
     return f"+{digits[0]}({digits[1:4]}){digits[4:7]}-{digits[7:9]}-{digits[9:11]}"
 
 
-def format_number(number: str) -> str:
+def format_order_number(number: str) -> str:
     return number.split(sep='-', maxsplit=1)[-1]
-
-
-def format_time(time: str) -> str:
-    return str(time.split('T')[-1][:-3])
-
-
-def format_date(date: str) -> str:
-    parts = date.split('T')[0].split('-')
-    return '.'.join(reversed(parts))
 
 
 def format_address(address: str) -> str:

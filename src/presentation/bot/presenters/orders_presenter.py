@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from aiogram.types import Message
 
-from src.core.entities import Order
+from src.suchef_bot.core import Order
 from src.presentation.bot.messages import OrderMessage
 
 
