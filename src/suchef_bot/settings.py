@@ -25,7 +25,8 @@ class GigaChatSettings(BaseSettings):
 
 
 class PostgresSettings(BaseSettings):
-    PG_HOST: str = os.getenv("POSTGRES_HOST")
+    # PG_HOST: str = os.getenv("POSTGRES_HOST")
+    PG_HOST: str = "localhost"
     PG_PORT: int = os.getenv("POSTGRES_PORT")
     PG_USER: str = os.getenv("POSTGRES_USER")
     PG_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
@@ -38,7 +39,7 @@ class PostgresSettings(BaseSettings):
         return f"postgresql+{self.DRIVER}://{self.PG_USER}:{self.PG_PASSWORD}@{self.PG_HOST}:{self.PG_PORT}/{self.PG_DB}"
 
 
-class RabbitSettings(BaseSettings):
+'''class RabbitSettings(BaseSettings):
     RABBIT_HOST: str = os.getenv("RABBIT_HOST")
     RABBIT_PORT: int = os.getenv("RABBIT_PORT")
     RABBIT_USER: str = os.getenv("RABBIT_USER")
@@ -83,4 +84,4 @@ class Settings(BaseSettings):
     redis: RedisSettings = RedisSettings()
     elasticsearch: ElasticsearchSettings = ElasticsearchSettings()
     unf: UNFSettings = UNFSettings()
-    embeddings: EmbeddingsSettings = EmbeddingsSettings()
+    embeddings: EmbeddingsSettings = EmbeddingsSettings()'''

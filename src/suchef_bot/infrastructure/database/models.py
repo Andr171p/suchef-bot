@@ -38,7 +38,7 @@ class MessageOrm(Base):
 
     __table_args__ = (
         CheckConstraint(
-            "role == 'user' OR role == 'assistant'",
+            "role = 'user' OR role = 'assistant'",
             "check_available_roles"
-        )
+        ),
     )
