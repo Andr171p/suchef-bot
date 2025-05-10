@@ -104,6 +104,7 @@ class AppProvider(Provider):
 
     @provide(scope=Scope.APP)
     def get_redis(self, config: Settings) -> AsyncRedis:
+        print(config.redis.redis_url)
         return AsyncRedis.from_url(config.redis.redis_url)
 
     @provide(scope=Scope.APP)

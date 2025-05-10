@@ -18,7 +18,8 @@ class BaseNode(ABC):
     @abstractmethod
     async def execute(self, state: AgentState) -> dict: pass
 
-    async def __call__(self, state: AgentState) -> dict: pass
+    async def __call__(self, state: AgentState) -> dict:
+        return await self.execute(state)
 
 
 class RetrieverNode(BaseNode):

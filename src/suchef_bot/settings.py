@@ -50,8 +50,8 @@ class RabbitSettings(BaseSettings):
 
 
 class RedisSettings(BaseSettings):
-    REDIS_HOST: str = os.getenv("REDIS_HOST")
-    REDIS_PORT: int = os.getenv("REDIS_PORT")
+    REDIS_HOST: str = "redis"
+    REDIS_PORT: int = 6379
 
     @property
     def redis_url(self) -> str:
