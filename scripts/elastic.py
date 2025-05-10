@@ -45,7 +45,7 @@ embeddings = HuggingFaceEmbeddings(
 
 
 elastic_client = Elasticsearch(
-    hosts=settings.elasticsearch.elasticsearch_url,
+    hosts="http://91.144.130.71:9200",
     basic_auth=(settings.elasticsearch.ELASTIC_USER, settings.elasticsearch.ELASTIC_PASSWORD)
 )
 
@@ -62,7 +62,7 @@ except Exception as e:
 
 
 elastic_store = ElasticsearchStore(
-    es_url=settings.elasticsearch.elasticsearch_url,
+    es_url="http://91.144.130.71:9200",
     index_name="suchef-vectors",
     embedding=embeddings,
     es_user=settings.elasticsearch.ELASTIC_USER,
@@ -79,3 +79,7 @@ bm25_retriever = ElasticSearchBM25Retriever(
 
 bm25_retriever.add_texts([document.page_content for document in chunks])
 print("Документы добавлены в индекс BM25.")
+
+retriever = elastic_store.as_retriever()
+docs = retriever.invoke("Как опратить заказ")
+print(docs)

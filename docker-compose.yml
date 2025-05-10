@@ -33,20 +33,6 @@ services:
       - "9200:9200"
       - "9300:9300"
 
-  bot:
-    build: .
-    restart: unless-stopped
-    volumes:
-      - .:/suchef_bot
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/suchef
-      - REDIS_URL=redis://redis:6379
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-    depends_on:
-      - postgres
-      - redis
-      - elasticsearch
-
 volumes:
   postgres_data:
   redis_data:
