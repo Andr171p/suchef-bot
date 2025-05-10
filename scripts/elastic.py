@@ -48,8 +48,9 @@ elastic_client = Elasticsearch(
     hosts="http://91.144.130.71:9200",
     basic_auth=(settings.elasticsearch.ELASTIC_USER, settings.elasticsearch.ELASTIC_PASSWORD)
 )
+print("ok")
 
-indices = elastic_client.cat.indices(h='index').split()
+'''indices = elastic_client.cat.indices(h='index').split()
 
 try:
     for index in indices:
@@ -58,7 +59,7 @@ try:
     print("Все индексы удалены")
 except Exception as e:
     print(e)
-    print("Нет индексов")
+    print("Нет индексов")'''
 
 
 elastic_store = ElasticsearchStore(
@@ -81,5 +82,5 @@ bm25_retriever.add_texts([document.page_content for document in chunks])
 print("Документы добавлены в индекс BM25.")
 
 retriever = elastic_store.as_retriever()
-docs = retriever.invoke("Как опратить заказ")
+docs = retriever.invoke("Как оплатить заказ")
 print(docs)
