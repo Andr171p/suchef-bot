@@ -14,10 +14,10 @@ logger = logging.getLogger(__name__)
 
 orders_router = RabbitRouter()
 
-exchange = RabbitExchange("orders", auto_delete=True, type=ExchangeType.FANOUT)
+exchange = RabbitExchange("orders", type=ExchangeType.FANOUT)
 
 
-@orders_router.subscriber("suchef-orders")
+@orders_router.subscriber("suchef-orders", exchange=exchange)
 async def send_orders(
         order: Order,
         user_repository: FromDishka[UserRepository],

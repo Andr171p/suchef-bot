@@ -2,7 +2,7 @@ import logging
 import asyncio
 
 from src.suchef_bot.ioc import container
-from src.suchef_bot.core.entities import UserMessage, AssistantMessage
+from src.suchef_bot.core.entities import UserMessage
 from src.suchef_bot.core.use_cases import ChatAssistant
 
 
