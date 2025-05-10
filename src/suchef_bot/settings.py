@@ -39,7 +39,7 @@ class PostgresSettings(BaseSettings):
         return f"postgresql+{self.DRIVER}://{self.PG_USER}:{self.PG_PASSWORD}@{self.PG_HOST}:{self.PG_PORT}/{self.PG_DB}"
 
 
-'''class RabbitSettings(BaseSettings):
+class RabbitSettings(BaseSettings):
     RABBIT_HOST: str = os.getenv("RABBIT_HOST")
     RABBIT_PORT: int = os.getenv("RABBIT_PORT")
     RABBIT_USER: str = os.getenv("RABBIT_USER")
@@ -47,23 +47,21 @@ class PostgresSettings(BaseSettings):
 
     @property
     def rabbit_url(self) -> str:
-        return f"amqp://{self.RABBIT_USER}:{self.RABBIT_PASSWORD}@{self.RABBIT_HOST}:{self.RABBIT_PORT}"
+        return f"amqp://{self.RABBIT_USER}:{self.RABBIT_PASSWORD}@{self.RABBIT_HOST}:{self.RABBIT_PORT}/"
 
 
 class RedisSettings(BaseSettings):
-    REDIS_HOST: str = os.getenv("REDIS_HOST")
-    REDIS_PORT: int = os.getenv("REDIS_PORT")
-    REDIS_USER: str = os.getenv("REDIS_USER")
-    REDIS_PASSWORD: str = os.getenv("REDIS_PASSWORD")
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6379
 
     @property
     def redis_url(self) -> str:
-        return f"redis://{self.REDIS_USER}:{self.REDIS_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}"
+        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}"
 
 
 class ElasticsearchSettings(BaseSettings):
-    ELASTIC_HOST: str = os.getenv("ELASTIC_HOST")
-    ELASTIC_PORT: int = os.getenv("ELASTIC_PORT")
+    ELASTIC_HOST: str = "localhost"
+    ELASTIC_PORT: int = 9200
     ELASTIC_USER: str = os.getenv("ELASTIC_USER")
     ELASTIC_PASSWORD: str = os.getenv("ELASTIC_PASSWORD")
 
@@ -84,4 +82,4 @@ class Settings(BaseSettings):
     redis: RedisSettings = RedisSettings()
     elasticsearch: ElasticsearchSettings = ElasticsearchSettings()
     unf: UNFSettings = UNFSettings()
-    embeddings: EmbeddingsSettings = EmbeddingsSettings()'''
+    embeddings: EmbeddingsSettings = EmbeddingsSettings()
