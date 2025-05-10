@@ -5,7 +5,6 @@ from abc import ABC, abstractmethod
 from langchain_core.retrievers import BaseRetriever
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.language_models import BaseChatModel
-from langchain_core.output_parsers import StrOutputParser
 
 from .states import AgentState
 from .utils import format_documents
@@ -40,7 +39,6 @@ class GenerationNode(BaseNode):
         self._llm_chain = (
             ChatPromptTemplate.from_template(GENERATION_TEMPLATE)
             | model
-            | StrOutputParser()
         )
 
     async def execute(self, state: AgentState) -> dict:
