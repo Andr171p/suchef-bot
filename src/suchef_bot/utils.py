@@ -25,6 +25,15 @@ def format_order_number(number: str) -> str:
     return number.split(sep='-', maxsplit=1)[-1]
 
 
+def format_time(time: str) -> str:
+    return str(time.split('T')[-1][:-3])
+
+
+def format_date(date: str) -> str:
+    parts = date.split('T')[0].split('-')
+    return '.'.join(reversed(parts))
+
+
 def format_address(address: str) -> str:
     parts = address.split(',')[3:]
     return ''.join(parts)
