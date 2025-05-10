@@ -24,7 +24,7 @@ print(f"Количество символов: {len(text)}")
 
 
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
+    chunk_size=600,
     chunk_overlap=20,
     length_function=len,
 )

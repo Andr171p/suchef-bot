@@ -14,7 +14,7 @@ from src.suchef_bot.utils import (
 class Order(BaseModel):
     client: str
     number: str
-    date: datetime
+    date: str
     status: ORDER_STATUS
     amount: float
     pay_link: str

@@ -36,7 +36,13 @@ from langchain_core.vectorstores import VectorStore, VectorStoreRetriever
 from langgraph.checkpoint.base import BaseCheckpointSaver
 
 from .core.use_cases import Registration, ChatAssistant, CustomerService
-from .core.interfaces import AiAgent, UserRepository, UNFGateway, PromoGateway
+from .core.interfaces import (
+    AiAgent,
+    UserRepository,
+    MessageRepository,
+    UNFGateway,
+    PromoGateway
+)
 
 from .ai_agent.agents import RAGAgent
 from .ai_agent.nodes import RetrieverNode, GenerationNode
@@ -44,7 +50,7 @@ from .ai_agent.nodes import RetrieverNode, GenerationNode
 from .infrastructure.rest import UNFApiGateway
 from .infrastructure.crawlers import PromoCrawlerGateway
 from .infrastructure.database.session import create_session_maker
-from .infrastructure.database.repositories import SQLUserRepository
+from .infrastructure.database.repositories import SQLUserRepository, SQLMessageRepository
 from .infrastructure.checkpoints.redis import AsyncRedisCheckpointSaver
 
 from .settings import Settings
@@ -173,6 +179,10 @@ class AppProvider(Provider):
     @provide(scope=Scope.REQUEST)
     def get_user_repository(self, session: AsyncSession) -> UserRepository:
         return SQLUserRepository(session)
+
+    @provide(scope=Scope.REQUEST)
+    def get_message_repository(self, session: AsyncSession) -> MessageRepository:
+        return SQLMessageRepository(session)
 
     @provide(scope=Scope.APP)
     def get_promo_gateway(self) -> PromoGateway:
