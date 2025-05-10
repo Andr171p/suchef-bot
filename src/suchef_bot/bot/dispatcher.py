@@ -13,9 +13,9 @@ from .handlers import (
 def create_dispatcher() -> Dispatcher:
     dispatcher = Dispatcher(storage=MemoryStorage())
     dispatcher.include_routers(
-        chat_router,
+        registration_router,
         customer_router,
-        registration_router
+        chat_router
     )
     setup_dishka(
         container=container,

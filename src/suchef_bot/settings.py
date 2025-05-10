@@ -25,8 +25,7 @@ class GigaChatSettings(BaseSettings):
 
 
 class PostgresSettings(BaseSettings):
-    # PG_HOST: str = os.getenv("POSTGRES_HOST")
-    PG_HOST: str = "localhost"
+    PG_HOST: str = os.getenv("POSTGRES_HOST")
     PG_PORT: int = os.getenv("POSTGRES_PORT")
     PG_USER: str = os.getenv("POSTGRES_USER")
     PG_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
@@ -51,16 +50,16 @@ class RabbitSettings(BaseSettings):
 
 
 class RedisSettings(BaseSettings):
-    REDIS_HOST: str = "localhost"
-    REDIS_PORT: int = 6379
+    REDIS_HOST: str = os.getenv("REDIS_HOST")
+    REDIS_PORT: int = os.getenv("REDIS_PORT")
 
     @property
     def redis_url(self) -> str:
-        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}"
+        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0"
 
 
 class ElasticsearchSettings(BaseSettings):
-    ELASTIC_HOST: str = "localhost"
+    ELASTIC_HOST: str = "elasticsearch"
     ELASTIC_PORT: int = 9200
     ELASTIC_USER: str = os.getenv("ELASTIC_USER")
     ELASTIC_PASSWORD: str = os.getenv("ELASTIC_PASSWORD")
