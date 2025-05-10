@@ -18,7 +18,7 @@ async def start(message: Message, registration: FromDishka[Registration]) -> Non
     is_registered = await registration.login(telegram_id)
     if not is_registered:
         await message.answer(
-            f"Здравствуйте, {username}! Вам нужно пройти регистрацию. Это займёт всего пару секунд",
+            f"Здравствуйте, {username}\\! Вам нужно пройти регистрацию. Это займёт всего пару секунд",
             reply_markup=start_keyboard()
         )
     else:
