@@ -6,6 +6,7 @@ import aiohttp
 
 from ..core.interfaces import UNFGateway
 from ..core.entities import Order, Bonus
+from ..constants import PROJECT_NAME
 
 
 logger = logging.getLogger(__name__)
@@ -26,7 +27,11 @@ class UNFApiGateway(UNFGateway):
                     json=json
                 ) as response:
                     data = await response.json()
-            return [Order.model_validate(order) for order in data["data"]["orders"]]
+            return [
+                Order.model_validate(order)
+                for order in data["data"]["orders"]
+                if order["project"] == PROJECT_NAME
+            ]
         except aiohttp.ClientError as e:
             logger.error("Error while receiving orders: %s", e)
 
