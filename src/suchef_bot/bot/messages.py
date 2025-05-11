@@ -42,7 +42,7 @@ class OrderMessage:
 
     @property
     def keyboard(self) -> InlineKeyboardMarkup:
-        if self.order.pay_status != "CONFIRMED":
+        if self.order.pay_status == "CONFIRMED":
             return confirmed_payment_keyboard(self.order.pay_link)
         return payment_keyboard(self.order.pay_link)
 
