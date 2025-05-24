@@ -1,8 +1,8 @@
 from typing import List
 
-from pydantic import BaseModel, field_validator, PositiveInt
+from pydantic import BaseModel, field_validator, Field
 
-from src.suchef_bot.constants import URL, ORDER_STATUS
+from src.suchef_bot.constants import URL, ORDER_STATUS, MIN_BONUS
 from src.suchef_bot.utils import (
     format_phone_number,
     format_order_number,
@@ -58,8 +58,8 @@ class Order(BaseModel):
 
 
 class Bonus(BaseModel):
-    flyers: PositiveInt
-    chips: PositiveInt
+    flyers: int = Field(ge=MIN_BONUS)
+    chips: int = Field(ge=MIN_BONUS)
 
 
 class Promo(BaseModel):
