@@ -59,9 +59,9 @@ class BonusMessage:
     @property
     def text(self) -> str:
         if self.bonus.chips > 0:
-            template_file = BONUSES_TEMPLATES_DIR / "Есть флаеры.txt"
+            template_file = BONUSES_TEMPLATES_DIR / "Есть_флаеры.txt"
         else:
-            template_file = BONUSES_TEMPLATES_DIR / "Нет фишек.txt"
+            template_file = BONUSES_TEMPLATES_DIR / "Нет_фишек.txt"
         template = read_txt(template_file)
         return template.format(**self.bonus.model_dump())
 
