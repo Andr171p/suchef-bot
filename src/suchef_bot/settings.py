@@ -73,7 +73,7 @@ class ElasticsearchSettings(BaseSettings):
 
     @property
     def url(self) -> str:
-        return f"http://{self.ELASTIC_HOST}:{self.ELASTIC_PORT}"
+        return f"http://{self.host}:{self.port}"
 
     @property
     def auth(self) -> tuple[str, str]:
