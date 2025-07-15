@@ -1,13 +1,25 @@
-FROM python:3.11
+FROM python:3.11-slim as builder
 
 WORKDIR /suchef_bot
 
-COPY requirements.txt .
+RUN pip install --no-cache-dir uv && \
+    uv venv -p python3.11 /opt/venv
 
-RUN  pip install --upgrade pip
+ENV PATH="/opt/venv/bin:$PATH"
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY pyproject.toml requirements.txt ./
+
+RUN uv pip install --no-cache -r requirements.txt
+
+FROM python:3.11-slim
+
+WORKDIR /suchef_bot
+
+COPY --from=builder /opt/venv /opt/venv
+
+ENV PATH="/opt/venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
 
 COPY . .
 
-CMD ["/bin/bash", "-c", "python main.py"]
+CMD alembic upgrade head && python main.py
