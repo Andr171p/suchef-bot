@@ -3,28 +3,24 @@ services:
     image: postgres:13-alpine
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=suchef
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5433:5432"
 
   redis:
     image: redis:6-alpine
     restart: unless-stopped
     volumes:
       - redis_data:/data
-    ports:
-      - "6379:6379"
 
   elasticsearch:
     image: elasticsearch:8.16.1
     environment:
       ES_JAVA_OPTS: "-Xmx512m -Xms512m"
-      ELASTIC_USERNAME: "elastic"
-      ELASTIC_PASSWORD: "password"
+      ELASTIC_USERNAME: ${ELASTICSEARCH_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTICSEARCH_PASSWORD}
       discovery.type: single-node
     volumes:
       - .docker/configs/elasticsearch/config.yml:/usr/share/elasticsearch/docker/config/elasticsearch.yml:ro
@@ -38,10 +34,6 @@ services:
     restart: unless-stopped
     volumes:
       - .:/suchef_bot
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/suchef
-      - REDIS_URL=redis://redis:6379
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
     depends_on:
       - postgres
       - redis

@@ -1,12 +1,6 @@
 from collections.abc import AsyncIterable
 
-from dishka import (
-    Provider,
-    provide,
-    Scope,
-    from_context,
-    make_async_container
-)
+from dishka import Provider, provide, Scope, from_context, make_async_container
 
 from aiogram import Bot
 from aiogram.enums.parse_mode import ParseMode
@@ -62,22 +56,22 @@ from .constants import (
 
 
 class AppProvider(Provider):
-    config = from_context(provides=Settings, scope=Scope.APP)
+    app_settings = from_context(provides=Settings, scope=Scope.APP)
 
     @provide(scope=Scope.APP)
-    def get_bot(self, config: Settings) -> Bot:
+    def get_bot(self, app_settings: Settings) -> Bot:
         return Bot(
-            token=config.bot.BOT_TOKEN,
+            token=app_settings.bot.token,
             default=DefaultBotProperties(parse_mode=ParseMode.HTML)
         )
 
     @provide(scope=Scope.APP)
-    def get_rabbit_broker(self, config: Settings) -> RabbitBroker:
-        return RabbitBroker(url=config.rabbit.rabbit_url)
+    def get_rabbit_broker(self, app_settings: Settings) -> RabbitBroker:
+        return RabbitBroker(url=app_settings.rabbit.url)
 
     @provide(scope=Scope.APP)
-    def get_session_maker(self, config: Settings) -> async_sessionmaker[AsyncSession]:
-        return create_session_maker(config.postgres)
+    def get_session_maker(self, app_settings: Settings) -> async_sessionmaker[AsyncSession]:
+        return create_session_maker(app_settings.postgres)
 
     @provide(scope=Scope.REQUEST)
     async def get_session(
@@ -88,31 +82,30 @@ class AppProvider(Provider):
             yield session
 
     @provide(scope=Scope.APP)
-    def get_embeddings(self, config: Settings) -> Embeddings:
+    def get_embeddings(self, app_settings: Settings) -> Embeddings:
         return HuggingFaceEmbeddings(
-            model_name=config.embeddings.MODEL_NAME,
-            model_kwargs=config.embeddings.MODEL_KWARGS,
-            encode_kwargs=config.embeddings.ENCODE_KWARGS
+            model_name=app_settings.embeddings.model_name,
+            model_kwargs=app_settings.embeddings.model_kwargs,
+            encode_kwargs=app_settings.embeddings.encode_kwargs
         )
 
     @provide(scope=Scope.APP)
-    def get_elasticsearch(self, config: Settings) -> Elasticsearch:
+    def get_elasticsearch(self, app_settings: Settings) -> Elasticsearch:
         return Elasticsearch(
-            hosts=config.elasticsearch.elasticsearch_url,
-            basic_auth=(config.elasticsearch.ELASTIC_USER, config.elasticsearch.ELASTIC_PASSWORD)
+            hosts=app_settings.elasticsearch.url,
+            basic_auth=app_settings.elasticsearch.auth
         )
 
     @provide(scope=Scope.APP)
-    def get_redis(self, config: Settings) -> AsyncRedis:
-        print(config.redis.redis_url)
-        return AsyncRedis.from_url(config.redis.redis_url)
+    def get_redis(self, app_settings: Settings) -> AsyncRedis:
+        return AsyncRedis.from_url(app_settings.redis.redis_url)
 
     @provide(scope=Scope.APP)
-    def get_vector_store(self, config: Settings, embeddings: Embeddings) -> VectorStore:
+    def get_vector_store(self, app_settings: Settings, embeddings: Embeddings) -> VectorStore:
         return ElasticsearchStore(
-            es_url=config.elasticsearch.elasticsearch_url,
-            es_user=config.elasticsearch.ELASTIC_USER,
-            es_password=settings.elasticsearch.ELASTIC_PASSWORD,
+            es_url=app_settings.elasticsearch.url,
+            es_user=app_settings.elasticsearch.user,
+            es_password=app_settings.elasticsearch.password,
             index_name="suchef-vectors",
             embedding=embeddings
         )
@@ -140,10 +133,10 @@ class AppProvider(Provider):
         )
 
     @provide(scope=Scope.APP)
-    def get_model(self, config: Settings) -> BaseChatModel:
+    def get_model(self, app_settings: Settings) -> BaseChatModel:
         return GigaChat(
-            credentials=config.giga_chat.GIGACHAT_API_KEY,
-            scope=config.giga_chat.GIGACHAT_SCOPE,
+            credentials=app_settings.giga_chat.api_key,
+            scope=app_settings.giga_chat.scope,
             verify_ssl_certs=False,
             profanity_check=False,
         )
@@ -190,8 +183,8 @@ class AppProvider(Provider):
         return PromoCrawlerGateway(PROMO_URL)
 
     @provide(scope=Scope.APP)
-    def get_unf_gateway(self, config: Settings) -> UNFGateway:
-        return UNFApiGateway(config.unf.UNF_URL)
+    def get_unf_gateway(self, app_settings: Settings) -> UNFGateway:
+        return UNFApiGateway(app_settings.api.url)
 
     @provide(scope=Scope.REQUEST)
     def get_registration(self, user_repository: UserRepository) -> Registration:

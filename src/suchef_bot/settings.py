@@ -1,76 +1,89 @@
-import os
-from typing import Literal
 from dotenv import load_dotenv
-from pydantic_settings import BaseSettings
 
-from .constants import ENV_PATH
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from .constants import ENV_PATH, DRIVER
 
 load_dotenv(ENV_PATH)
 
 
-class EmbeddingsSettings(BaseSettings):
-    MODEL_NAME: str = "deepvk/USER-bge-m3"  # 1024 dimensional
-    MODEL_KWARGS: dict = {"device": "cpu"}
-    ENCODE_KWARGS: dict = {"normalize_embeddings": False}
+class EmbeddingsSettings(BaseModel):
+    model_name: str = "deepvk/USER-bge-m3"  # 1024 dimensional
+    model_kwargs: dict = {"device": "cpu"}
+    encode_kwargs: dict = {"normalize_embeddings": False}
 
 
 class BotSettings(BaseSettings):
-    BOT_TOKEN: str = os.getenv("BOT_TOKEN")
+    token: str = ""
+
+    model_config = SettingsConfigDict(env_prefix="BOT_")
 
 
 class GigaChatSettings(BaseSettings):
-    GIGACHAT_API_KEY: str = os.getenv("GIGACHAT_API_KEY")
-    GIGACHAT_SCOPE: str = os.getenv("GIGACHAT_SCOPE")
+    api_key: str = ""
+    scope: str = ""
+
+    model_config = SettingsConfigDict(env_prefix="GIGACHAT_")
 
 
 class PostgresSettings(BaseSettings):
-    PG_HOST: str = os.getenv("POSTGRES_HOST")
-    PG_PORT: int = os.getenv("POSTGRES_PORT")
-    PG_USER: str = os.getenv("POSTGRES_USER")
-    PG_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
-    PG_DB: str = os.getenv("POSTGRES_DB")
+    host: str = "postgres"
+    port: int = 5432
+    user: str = "postgres"
+    password: str = "postgres"
+    db: str = "postgres"
 
-    DRIVER: Literal["asyncpg"] = "asyncpg"
+    model_config = SettingsConfigDict(env_prefix="POSTGRES_")
 
     @property
-    def sqlalchemy_url(self) -> str:
-        return f"postgresql+{self.DRIVER}://{self.PG_USER}:{self.PG_PASSWORD}@{self.PG_HOST}:{self.PG_PORT}/{self.PG_DB}"
+    def url(self) -> str:
+        return f"postgresql+{DRIVER}://{self.user}:{self.password}@{self.host}:{self.port}/{self.db}"
 
 
 class RabbitSettings(BaseSettings):
-    RABBIT_HOST: str = os.getenv("RABBIT_HOST")
-    RABBIT_PORT: int = os.getenv("RABBIT_PORT")
-    RABBIT_USER: str = os.getenv("RABBIT_USER")
-    RABBIT_PASSWORD: str = os.getenv("RABBIT_PASSWORD")
+    host: str = "localhost"
+    port: int = 5672
+    user: str = ""
+    password: str = ""
+
+    model_config = SettingsConfigDict(env_prefix="RABBIT_")
 
     @property
-    def rabbit_url(self) -> str:
-        return f"amqp://{self.RABBIT_USER}:{self.RABBIT_PASSWORD}@{self.RABBIT_HOST}:{self.RABBIT_PORT}/"
+    def url(self) -> str:
+        return f"amqp://{self.user}:{self.password}@{self.host}:{self.port}/"
 
 
 class RedisSettings(BaseSettings):
-    REDIS_HOST: str = "redis"
-    REDIS_PORT: int = 6379
+    host: str = "redis"
+    port: int = 6379
 
     @property
-    def redis_url(self) -> str:
-        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0"
+    def url(self) -> str:
+        return f"redis://{self.host}:{self.port}/0"
 
 
 class ElasticsearchSettings(BaseSettings):
-    ELASTIC_HOST: str = "elasticsearch"
-    ELASTIC_PORT: int = 9200
-    ELASTIC_USER: str = os.getenv("ELASTIC_USER")
-    ELASTIC_PASSWORD: str = os.getenv("ELASTIC_PASSWORD")
+    host: str = "elasticsearch"
+    port: int = 9200
+    username: str = ""
+    password: str = ""
+
+    model_config = SettingsConfigDict(env_prefix="ELASTICSEARCH_")
 
     @property
-    def elasticsearch_url(self) -> str:
+    def url(self) -> str:
         return f"http://{self.ELASTIC_HOST}:{self.ELASTIC_PORT}"
 
+    @property
+    def auth(self) -> tuple[str, str]:
+        return self.username, self.password
 
-class UNFSettings(BaseSettings):
-    UNF_URL: str = os.getenv("UNF_URL")
+
+class APISettings(BaseSettings):
+    url: str = ""
+
+    model_config = SettingsConfigDict(env_prefix="API_")
 
 
 class Settings(BaseSettings):
@@ -80,5 +93,5 @@ class Settings(BaseSettings):
     rabbit: RabbitSettings = RabbitSettings()
     redis: RedisSettings = RedisSettings()
     elasticsearch: ElasticsearchSettings = ElasticsearchSettings()
-    unf: UNFSettings = UNFSettings()
+    api: APISettings = APISettings()
     embeddings: EmbeddingsSettings = EmbeddingsSettings()
