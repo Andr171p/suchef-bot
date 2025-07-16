@@ -98,7 +98,7 @@ class AppProvider(Provider):
 
     @provide(scope=Scope.APP)
     def get_redis(self, app_settings: Settings) -> AsyncRedis:
-        return AsyncRedis.from_url(app_settings.redis.redis_url)
+        return AsyncRedis.from_url(app_settings.redis.url)
 
     @provide(scope=Scope.APP)
     def get_vector_store(self, app_settings: Settings, embeddings: Embeddings) -> VectorStore:
