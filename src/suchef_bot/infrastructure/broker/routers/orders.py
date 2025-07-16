@@ -27,6 +27,8 @@ async def send_orders(
     if order.project == PROJECT_NAME:
         for phone_number in order.phones:
             telegram_id = await user_repository.get_telegram_id_by_phone_number(phone_number)
+            if telegram_id is None:
+                continue
             order_message = OrderMessage(order)
             await bot.send_photo(
                 chat_id=telegram_id,
