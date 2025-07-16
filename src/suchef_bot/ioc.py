@@ -104,7 +104,7 @@ class AppProvider(Provider):
     def get_vector_store(self, app_settings: Settings, embeddings: Embeddings) -> VectorStore:
         return ElasticsearchStore(
             es_url=app_settings.elasticsearch.url,
-            es_user=app_settings.elasticsearch.user,
+            es_user=app_settings.elasticsearch.username,
             es_password=app_settings.elasticsearch.password,
             index_name="suchef-vectors",
             embedding=embeddings
